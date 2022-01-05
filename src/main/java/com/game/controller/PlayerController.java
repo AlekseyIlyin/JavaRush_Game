@@ -45,16 +45,23 @@ public class PlayerController {
         if (!paramPlayer.isValidDataForCreate()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        Date birthday = paramPlayer.getBirthday();
+
         Player newPlayer = paramPlayer.getPlayerEntity();
         playerService.create(newPlayer);
         if (newPlayer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
+
+        newPlayer.setBirthday(birthday);
+/*
         // + fix for Test
         if (newPlayer.getBirthday().getTime() == 988056000000L) {
             newPlayer.setBirthday(new Date(988059600000L));
         }
         // - fix for Test
+*/
         return new ResponseEntity<>(newPlayer, HttpStatus.OK);
     }
 
