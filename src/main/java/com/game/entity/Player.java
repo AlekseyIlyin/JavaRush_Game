@@ -1,11 +1,7 @@
 package com.game.entity;
 
-import com.game.component.LongToDateConverter;
-
 import javax.persistence.*;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -32,8 +28,7 @@ public class Player {
     private Profession profession;
 
     @Column(name = "birthday")
-    @Convert(converter = LongToDateConverter.class)
-    private Long birthday;
+    private Date birthday;
 
     @Column(name = "banned")
     private Boolean banned;
@@ -92,11 +87,11 @@ public class Player {
     }
 
     public Long getBirthday() {
-        return this.birthday;
+        return this.birthday.getTime();
     }
 
     public void setBirthday(Long birthday) {
-        this.birthday = birthday;
+        this.birthday = new Date(birthday);
     }
 
     public Profession getProfession() {
@@ -151,7 +146,6 @@ public class Player {
 
     @Override
     public String toString() {
-        LocalDate birthday = Instant.ofEpochMilli(this.birthday).atZone(ZoneId.systemDefault()).toLocalDate();
         return "Player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
