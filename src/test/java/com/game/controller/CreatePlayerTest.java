@@ -68,10 +68,7 @@ public class CreatePlayerTest extends AbstractTest {
                 .content(TestsHelper.BANNED_TRUE_JSON))
                 .andExpect(status().isOk());
 
-        // + Bad date with + time part, 988059600000L is equ 2001-04-24T01:00
-        //PlayerInfoTest expected = new PlayerInfoTest(41L, "Амарылис", "Прозелит", Race.DWARF, Profession.CLERIC, 988059600000L, true, 63986, 35, 2614);
-        PlayerInfoTest expected = new PlayerInfoTest(41L, "Амарылис", "Прозелит", Race.DWARF, Profession.CLERIC, 988056000000L, true, 63986, 35, 2614);
-        // - Bad date with + time part
+        PlayerInfoTest expected = new PlayerInfoTest(41L, "Амарылис", "Прозелит", Race.DWARF, Profession.CLERIC, 988059600000L, true, 63986, 35, 2614);
         String contentAsString = resultActions.andReturn().getResponse().getContentAsString();
         PlayerInfoTest actual = new ObjectMapper().readValue(contentAsString, PlayerInfoTest.class);
         assertEquals("Возвращается не правильный результат при запросе создания игрока.", expected, actual);

@@ -1,7 +1,7 @@
 package com.game.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -86,12 +86,12 @@ public class Player {
         this.banned = banned;
     }
 
-    public Long getBirthday() {
-        return this.birthday.getTime();
+    public Date getBirthday() {
+        return this.birthday;
     }
 
-    public void setBirthday(Long birthday) {
-        this.birthday = new Date(birthday);
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public Profession getProfession() {

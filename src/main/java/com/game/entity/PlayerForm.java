@@ -1,7 +1,8 @@
 package com.game.entity;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Calendar;
+
 
 public class PlayerForm {
 
@@ -9,7 +10,7 @@ public class PlayerForm {
     private String title;
     private Race race;
     private Profession profession;
-    private Long birthday;
+    private Date birthday;
     private Boolean banned;
     private Integer experience;
     private Integer birthday_year;
@@ -30,7 +31,7 @@ public class PlayerForm {
         return profession;
     }
 
-    public Long getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -45,7 +46,7 @@ public class PlayerForm {
     private boolean isValidBirthdayYear(boolean defaultIfNullBirthday) {
         if (this.birthday != null) {
             Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date(this.birthday));
+            cal.setTime(this.birthday);
             this.birthday_year = cal.get(Calendar.YEAR);
             return this.birthday_year >= 2000 && this.birthday_year <= 3000;
         } else {
@@ -66,8 +67,7 @@ public class PlayerForm {
     public boolean isValidData() {
         return
             isValidBirthdayYear(true) &&
-            (this.experience == null || (this.experience >= 0 && this.experience <= 10_000_000))   &&
-            (this.birthday == null || this.birthday >= 0);
+            (this.experience == null || (this.experience >= 0 && this.experience <= 10_000_000));
     }
 
     public Player getPlayerEntity() {

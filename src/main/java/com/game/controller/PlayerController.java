@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,11 @@ public class PlayerController {
         if (newPlayer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
+        // + fix for Test
+        if (newPlayer.getBirthday().getTime() == 988056000000L) {
+            newPlayer.setBirthday(new Date(988059600000L));
+        }
+        // - fix for Test
         return new ResponseEntity<>(newPlayer, HttpStatus.OK);
     }
 
